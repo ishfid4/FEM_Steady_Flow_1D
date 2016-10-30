@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mes.iml" filepath="$PROJECT_DIR$/.idea/modules/mes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mes_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mes_main.iml" group="mes" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mes_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mes_test.iml" group="mes" />
+    </modules>
+  </component>
+</project>
