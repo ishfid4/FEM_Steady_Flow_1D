@@ -59,6 +59,10 @@ public class Main {
             wireframe.setQ(scanner.nextDouble());
             wireframe.setAmbientTemp(scanner.nextDouble());
 
+            for (Element element: elementList) {
+                element.calculateH(nodeList,wireframe);
+                element.calculateP(nodeList,wireframe);
+            }
 
             // Temperature from nodes to file
             for (int i = 0; i < nodeList.size(); ++i) {
