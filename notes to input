@@ -1,0 +1,13 @@
+3 // nodes count
+.0 // x in node
+7.5 // same
+15 // same
+2 // boundary condition count
+1 1 //first node -> boundary condition 1
+3 2 // third node -> boundary condition 2
+2 // elements count
+1 1 2 s k l // (element id) (node1 id) (node2 id) s k l
+1 1 2 s k l // (element id) (node1 id) (node2 id) s k l
+alpha
+q
+to //ambient temp
