@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        SystemOfEquations systemOfEquations;
         Wireframe wireframe = new Wireframe();
         List<Node> nodeList = new ArrayList<Node>();
         List<Element> elementList = new ArrayList<Element>();
@@ -59,10 +60,18 @@ public class Main {
             wireframe.setQ(scanner.nextDouble());
             wireframe.setAmbientTemp(scanner.nextDouble());
 
+            // Calculating H matrix, tension vector P
             for (Element element: elementList) {
                 element.calculateH(nodeList,wireframe);
                 element.calculateP(nodeList,wireframe);
             }
+
+            // Creating global H matrix, and global tension vector P
+            systemOfEquations = new SystemOfEquations(wireframe.getNodeCount());
+            systemOfEquations.calculateGlobalH(elementList);
+            systemOfEquations.calculateGlobalP(elementList);
+
+            systemOfEquations.showHandP();
 
             // Temperature from nodes to file
             for (int i = 0; i < nodeList.size(); ++i) {
