@@ -1,4 +1,4 @@
-package pl.ishfid.mes;
+package pl.ishfid.mes.models;
 
 import java.util.List;
 

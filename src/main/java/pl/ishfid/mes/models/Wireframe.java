@@ -1,4 +1,4 @@
-package pl.ishfid.mes;
+package pl.ishfid.mes.models;
 
 /**
  * Created by ishfid on 30.10.16.
