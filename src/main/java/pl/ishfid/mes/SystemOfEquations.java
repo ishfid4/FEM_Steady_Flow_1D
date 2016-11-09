@@ -1,5 +1,7 @@
 package pl.ishfid.mes;
 
+import pl.ishfid.mes.models.Element;
+
 import java.util.List;
 
 /**
@@ -57,5 +59,21 @@ public class SystemOfEquations {
         }
         System.out.println();
 
+    }
+
+    public double[][] getGlobalHmatrix() {
+        return globalHmatrix;
+    }
+
+    public double[] getGlobalPvector() {
+        return globalPvector;
+    }
+
+    public void setTemperatureVector(double[] temperatureVector) {
+        this.temperatureVector = temperatureVector;
+    }
+
+    public double[] getTemperatureVector() {
+        return temperatureVector;
     }
 }

@@ -1,7 +1,11 @@
 package pl.ishfid.mes;
 
+import org.apache.commons.math3.linear.*;
+import pl.ishfid.mes.models.Element;
+import pl.ishfid.mes.models.Node;
+import pl.ishfid.mes.models.Wireframe;
+
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,6 +22,9 @@ public class Main {
         Wireframe wireframe = new Wireframe();
         List<Node> nodeList = new ArrayList<Node>();
         List<Element> elementList = new ArrayList<Element>();
+        DecompositionSolver solver;
+        RealMatrix coefficients;
+        RealVector constans;
 
         FileInputStream in = null;
         PrintWriter out = null;
@@ -73,11 +80,27 @@ public class Main {
 
             systemOfEquations.showHandP();
 
-            // Temperature from nodes to file
-            for (int i = 0; i < nodeList.size(); ++i) {
-               out.printf("%f",nodeList.get(i).getTemperature());
-               out.println();
+            // Solving linear equation system
+            coefficients = new Array2DRowRealMatrix(systemOfEquations.getGlobalHmatrix(), false);
+            solver = new LUDecomposition(coefficients).getSolver();
+
+            constans = new ArrayRealVector(systemOfEquations.getGlobalPvector(), false);
+            constans = constans.mapMultiply(-1);
+            systemOfEquations.setTemperatureVector(solver.solve(constans).toArray());
+            
+            // Setting temperatures to the nodes
+            for(int i = 0; i < systemOfEquations.getTemperatureVector().length; ++i){
+                nodeList.get(i).setTemperature(systemOfEquations.getTemperatureVector()[i]);
             }
+
+            // Temperature from nodes to file
+            System.out.println("\nTemperature values: ");
+            for (Node node: nodeList) {
+                System.out.println(node.getTemperature());
+                out.printf("%f",node.getTemperature());
+                out.println();
+            }
+
         }finally {
             if (in != null) {
                 in.close();
