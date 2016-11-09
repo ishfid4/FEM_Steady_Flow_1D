@@ -7,8 +7,8 @@ import java.util.List;
  */
 public class SystemOfEquations {
     private double[][] globalHmatrix;
-    private double[][] globalPvector;
-    private double[][] temperatureVector;
+    private double[] globalPvector;
+    private double[] temperatureVector;
 
     public SystemOfEquations(int nodeCount) {
         this.globalHmatrix = new double[nodeCount][nodeCount];
@@ -18,11 +18,11 @@ public class SystemOfEquations {
             }
         }
 
-        this.globalPvector = new double[1][nodeCount];
-        this.temperatureVector = new double[1][nodeCount];
+        this.globalPvector = new double[nodeCount];
+        this.temperatureVector = new double[nodeCount];
         for (int i = 0; i < nodeCount; ++i){
-            this.globalPvector[0][i] = 0;
-            this.temperatureVector[0][i] = 0;
+            this.globalPvector[i] = 0;
+            this.temperatureVector[i] = 0;
         }
     }
 
@@ -37,8 +37,8 @@ public class SystemOfEquations {
 
     public void calculateGlobalP(List<Element> elementList){
         for (Element element: elementList) {
-            this.globalPvector[0][element.getId1()-1] += element.getP()[0][0];
-            this.globalPvector[0][element.getId2()-1] += element.getP()[0][1];
+            this.globalPvector[element.getId1()-1] += element.getP()[0];
+            this.globalPvector[element.getId2()-1] += element.getP()[1];
         }
     }
 
@@ -51,9 +51,9 @@ public class SystemOfEquations {
             System.out.println();
         }
 
-        System.out.println("P vector");
+        System.out.println("P vector"); //odwrotnie wiersz z kolmna??
         for (int j = 0; j < this.globalHmatrix.length; ++j){
-            System.out.print(this.globalPvector[0][j] + " ");
+            System.out.print(this.globalPvector[j] + " ");
         }
         System.out.println();
 

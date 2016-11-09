@@ -12,7 +12,8 @@ public class Element {
     //characteristics of node
     private double s, k, l;
 
-    private double[][] h, p;
+    private double[][] h;
+    private double[] p;
 
     public Element(int id) {
         this.id = id;
@@ -20,7 +21,7 @@ public class Element {
         this.s = .0;
         this.k = .0;
         this.h = new double[2][2];
-        this.p = new double[1][2];
+        this.p = new double[2];
     }
 
     public void calculateH(List<Node> nodeList, Wireframe wireframe){
@@ -47,21 +48,21 @@ public class Element {
     }
 
     public void calculateP(List<Node> nodeList, Wireframe wireframe){
-        // boundary condition 2 -> stream
+        // boundary condition 1 -> stream
         if (nodeList.get(id1-1).getBoundaryCondition() == 1){
-            this.p[0][0] = this.s * wireframe.getQ();
+            this.p[0] = this.s * wireframe.getQ();
         } else if (nodeList.get(id1-1).getBoundaryCondition() == 2) {
-            this.p[0][0] = -(this.s * wireframe.getAlpha()*wireframe.getAmbientTemp());
+            this.p[0] = -(this.s * wireframe.getAlpha()*wireframe.getAmbientTemp());
         } else {
-            this.p[0][0] = 0;
+            this.p[0] = 0;
         }
 
         if (nodeList.get(id2-1).getBoundaryCondition() == 1){
-            this.p[0][1] = this.s * wireframe.getQ();
+            this.p[1] = this.s * wireframe.getQ();
         } else if (nodeList.get(id2-1).getBoundaryCondition() == 2) {
-            this.p[0][1] = -(this.s * wireframe.getAlpha()*wireframe.getAmbientTemp());
+            this.p[1] = -(this.s * wireframe.getAlpha()*wireframe.getAmbientTemp());
         } else {
-            this.p[0][1] = 0;
+            this.p[1] = 0;
         }
     }
 
@@ -81,7 +82,7 @@ public class Element {
         this.id2 = id2;
     }
 
-    public double[][] getP() {
+    public double[] getP() {
         return p;
     }
 
