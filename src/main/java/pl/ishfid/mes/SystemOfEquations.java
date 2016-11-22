@@ -53,7 +53,7 @@ public class SystemOfEquations {
             System.out.println();
         }
 
-        System.out.println("P vector"); //odwrotnie wiersz z kolmna??
+        System.out.println("P vector");
         for (int j = 0; j < this.globalHmatrix.length; ++j){
             System.out.print(this.globalPvector[j] + " ");
         }

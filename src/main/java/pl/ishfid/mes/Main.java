@@ -46,8 +46,12 @@ public class Main {
             }
             // Setting boundary condition flag for nodes
             tmpInt = scanner.nextInt();
+            int tmpNodeId, tmpBC;
             for (int i = 0; i < tmpInt; ++i){
-                nodeList.get(scanner.nextInt()-1).setBoundaryCondition(scanner.nextInt());
+                tmpNodeId = scanner.nextInt();
+                tmpBC = scanner.nextInt();
+                nodeList.get(tmpNodeId-1).setBoundaryCondition(tmpBC);
+//                nodeList.get(scanner.nextInt()-1).setBoundaryCondition(scanner.nextInt());
             }
             // Creating elements
             tmpInt = scanner.nextInt();
